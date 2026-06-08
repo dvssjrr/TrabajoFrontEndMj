@@ -7,6 +7,26 @@
     <title>Formulario Inicial</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-color: #2f2f2f;
+            color: #f1f1f1;
+        }
+        /* Mantener campos legibles sobre fondo oscuro */
+        .form-control {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        /* Ajuste opcional para botones (contraste leve) */
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,7 +39,7 @@
         <div class="row">
             <div class="col col-3"></div>
             <div class="col col-9">
-                <form action="" method="post">
+                <form id="form_registro" action="" method="post">
                     <div class="row">
                         <div class="col">
                             <h3>Formulario Registro</h3>
@@ -30,12 +50,12 @@
                     <div class="row">
                         <div class="col">
                             <label for="input_nombre" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" name="" id="input_nombre"
+                            <input type="text" class="form-control" name="nombre" id="input_nombre"
                                 placeholder="Ingrese nombre usuario" required>
                         </div>
                         <div class="col">
                             <label for="input_rut" class="form-label">RUT:</label>
-                            <input type="text" class="form-control" name="" id="input_rut"
+                            <input type="text" class="form-control" name="rut" id="input_rut"
                                 placeholder="Ingrese RUT usuario" required>
                         </div>
                     </div>
@@ -44,7 +64,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="input_email" class="form-label">Email:</label>
-                            <input type="email" class="form-control" name="" id="input_email"
+                            <input type="email" class="form-control" name="email" id="input_email"
                                 placeholder="Ingrese email usuario" required>
                         </div>
                     </div>
@@ -52,14 +72,38 @@
 
                     <div class="row">
                         <div class="col">
+                            <label for="input_fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
+                            <input type="date" class="form-control" name="fecha_nacimiento" id="input_fecha_nacimiento" required>
+                        </div>
+                        <div class="col">
+                            <label class="form-label d-block">Género:</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genero" id="genero_m" value="masculino" required>
+                                <label class="form-check-label" for="genero_m">Masculino</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genero" id="genero_f" value="femenino">
+                                <label class="form-check-label" for="genero_f">Femenino</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genero" id="genero_o" value="otro">
+                                <label class="form-check-label" for="genero_o">Otro</label>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col">
                             <label for="input_contrasena" class="form-label">Contraseña:</label>
-                            <input type="password" class="form-control" name="" id="input_contrasena"
-                                placeholder="Ingrese contraseña">
+                            <input type="password" class="form-control" name="contrasena" id="input_contrasena"
+                                placeholder="Ingrese contraseña" required>
                         </div>
                         <div class="col">
                             <label for="input_confirm_contrasena" class="form-label">Confirme Contraseña:</label>
-                            <input type="password" class="form-control" name="" id="input_confirm_contrasena"
-                                placeholder="Repita contraseña">
+                            <input type="password" class="form-control" name="confirmacion_contrasena" id="input_confirm_contrasena"
+                                placeholder="Repita contraseña" required>
                         </div>
 
                     </div>
@@ -78,10 +122,7 @@
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/formulario.js"></script>
-    <script>
-        alert('Trabajando con FORM...')
-    </script>
+    <script src="js/procesar_form.js"></script>
 </body>
 
 </html>
