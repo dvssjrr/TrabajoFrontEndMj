@@ -44,7 +44,7 @@
 
                     <div class="row">
                         <div class="col">
-                        <label for="input_email" class="form-label">Email:</label>
+                            <label for="input_email" class="form-label">Email:</label>
                         <input type="email" class="form-control bg-white text-dark" name="email" id="input_email"
                         placeholder="Ingrese su email" required>
                         </div>
@@ -53,22 +53,26 @@
 
                     <div class="row">
                         <div class="col">
-                        <label for="input_fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
-                        <input type="date" class="form-control bg-white text-dark" name="fecha_nacimiento" id="input_fecha_nacimiento" required>
+                            <label for="input_fecha_nacimiento" class="form-label">Fecha de nacimiento (dd/MM/yyyy):</label>
+                        <input type="text" class="form-control bg-white text-dark" name="fecha_nacimiento" id="input_fecha_nacimiento" placeholder="dd/MM/yyyy">
                         </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
                         <div class="col">
-                        <label class="form-label d-block">Género:</label>
+                            <label class="form-label d-block">Género:</label>
                         <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="genero" id="genero_m" value="masculino" required>
+                        <input class="form-check-input" type="radio" name="genero" id="genero_m" value="masculino">
                             <label class="form-check-label" for="genero_m">Masculino</label>
                         </div>
                          <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="genero" id="genero_f" value="femenino">
-                         <label class="form-check-label" for="genero_f">Femenino</label>
+                            <label class="form-check-label" for="genero_f">Femenino</label>
                         </div>
                         <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="genero" id="genero_o" value="otro">
-                        <label class="form-check-label" for="genero_o">Otro</label>
+                            <label class="form-check-label" for="genero_o">Otro</label>
                         </div>
                             
                         </div>
@@ -77,12 +81,12 @@
 
                     <div class="row">
                         <div class="col">
-                        <label for="input_contrasena" class="form-label">Contraseña:</label>
+                            <label for="input_contrasena" class="form-label">Contraseña:</label>
                         <input type="password" class="form-control bg-white text-dark" name="contrasena" id="input_contrasena"
                          placeholder="Ingrese contraseña" required>
                         </div>
                         <div class="col">
-                        <label for="input_confirm_contrasena" class="form-label">Confirme Contraseña:</label>
+                            <label for="input_confirm_contrasena" class="form-label">Confirme Contraseña:</label>
                         <input type="password" class="form-control bg-white text-dark" name="confirmacion_contrasena" id="input_confirm_contrasena"
                         placeholder="Repite contraseña" required>
                         </div>
@@ -93,8 +97,8 @@
                     <div class="row">
                         <div class="col"></div>
                         <div class="col">
-                        <input type="button" class="btn btn-secondary" value="Cancelar">
-                        <input type="submit" class="btn btn-primary" value="Enviar">
+                        <input type="button" id="btn_cancelar" class="btn btn-secondary" value="Cancelar">
+                        <input type="submit" id="btn_enviar" class="btn btn-primary" value="Enviar">
                         </div>
                     </div>
                 </form>
@@ -103,7 +107,7 @@
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/procesar_form.js"></script>
+    <script src="js/procesar_formulario.js"></script>
 </body>
 
 </html>

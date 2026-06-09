@@ -2,3 +2,48 @@
     border: 2px solid red;
     background-color: #ffcccc;
 }
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+#form_registro {
+    border-radius: 8px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 4px;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.btn {
+    margin-right: 10px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+}
