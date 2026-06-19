@@ -41,34 +41,167 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function validarContrasena(password) {
-        return password.length >= 8 && password.length <= 12 && 
-               /[A-Z]/.test(password) && /[a-z]/.test(password) && 
-               /[0-9]/.test(password) && /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+        return password.length >= 8 && password.length <= 12 &&
+            /[A-Z]/.test(password) && /[a-z]/.test(password) &&
+            /[0-9]/.test(password) && /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
     }
 
+    function setInvalid(campo, esValido) {
+        if (!campo) return;
+        if (esValido) campo.classList.remove('is-invalid');
+        else campo.classList.add('is-invalid');
+    }
+
+    // ===== Validación en vivo (filtrar escritura) =====
+    function filtrarRutEnVivo(valor) {
+        valor = (valor ?? '').toUpperCase();
+        valor = valor.replace(/\s+/g, '');
+        // Permite: dígitos, '.', '-', y 'K'
+        valor = valor.replace(/[^0-9\.\-K]/g, '');
+
+        const partes = valor.split('-');
+        if (partes.length > 2) valor = partes.slice(0, 2).join('-');
+
+        // Mantener solo un 'K' al final
+        valor = valor.replace(/K(?!$)/g, '');
+        return valor;
+    }
+
+    function filtrarNombreEnVivo(valor) {
+        valor = (valor ?? '').replace(/\s+/g, ' ');
+        // Permite letras (incluye acentos), espacios y Ññ
+        return valor.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ ]/g, '');
+    }
+
+    function filtrarEmailEnVivo(valor) {
+        return (valor ?? '').replace(/\s+/g, '');
+    }
+
+    function filtrarFechaEnVivo(valor) {
+        valor = (valor ?? '').replace(/\s+/g, '');
+        // Permite solo dígitos y '/'
+        valor = valor.replace(/[^0-9\/]/g, '');
+        // Limita a 10 caracteres: dd/MM/yyyy
+        return valor.slice(0, 10);
+    }
+
+    function engancharFiltros() {
+        campoRut && campoRut.addEventListener('input', function () {
+            const original = campoRut.value;
+            const filtrado = filtrarRutEnVivo(original);
+            if (filtrado !== original) {
+                const pos = campoRut.selectionStart;
+                campoRut.value = filtrado;
+                // Restaurar cursor aproximado
+                try {
+                    campoRut.setSelectionRange(Math.min(pos, filtrado.length), Math.min(pos, filtrado.length));
+                } catch (_) { }
+            }
+        });
+
+        campoNombre && campoNombre.addEventListener('input', function () {
+            const original = campoNombre.value;
+            const filtrado = filtrarNombreEnVivo(original);
+            if (filtrado !== original) campoNombre.value = filtrado;
+        });
+
+        campoEmail && campoEmail.addEventListener('input', function () {
+            const original = campoEmail.value;
+            const filtrado = filtrarEmailEnVivo(original);
+            if (filtrado !== original) campoEmail.value = filtrado;
+        });
+
+        campoFechaNacimiento && campoFechaNacimiento.addEventListener('input', function () {
+            const original = campoFechaNacimiento.value;
+            const filtrado = filtrarFechaEnVivo(original);
+            if (filtrado !== original) campoFechaNacimiento.value = filtrado;
+        });
+    }
 
     function validarFormulario(event) {
         event.preventDefault();
-        if (!campoNombre.value.trim()) { alert('El campo Nombre es obligatorio'); campoNombre.focus(); return false; }
-        if (!campoRut.value.trim()) { alert('El campo RUT es obligatorio'); campoRut.focus(); return false; }
-        
-        if (!validarRUT(campoRut.value)) { alert('El RUT ingresado no es válido'); campoRut.focus(); return false; }
-        if (!campoEmail.value.trim()) { alert('El campo Email es obligatorio'); campoEmail.focus(); return false; }
-        
-        if (!validarEmail(campoEmail.value)) { alert('El formato de Email no es válido. Use: nombre_usuario@servidor.dominio'); campoEmail.focus(); return false; }
-        if (campoFechaNacimiento.value.trim() && !validarFecha(campoFechaNacimiento.value)) { alert('El formato de fecha debe ser dd/MM/yyyy'); campoFechaNacimiento.focus(); return false; }
-        if (!contrasena.value.trim()) { alert('El campo Contraseña es obligatorio'); contrasena.focus(); return false; }
-        
-        if (!validarContrasena(contrasena.value)) { alert('La contraseña debe tener:\n- Mínimo 8 caracteres, máximo 12\n- Al menos 1 letra mayúscula\n- Al menos 1 letra minúscula\n- Al menos 1 número\n- Al menos 1 carácter especial (!@#$%^&*()_+-=[]{};\':"|,.<>/?)'​); contrasena.focus(); return false; }
-        if (!confirmacionContrasena.value.trim()) { alert('El campo Confirmar Contraseña es obligatorio'); confirmacionContrasena.focus(); return false; }
-        if (contrasena.value !== confirmacionContrasena.value) { alert('Las contraseñas no coinciden'); confirmacionContrasena.focus(); return false; }
+
+        if (!campoNombre.value.trim()) {
+            alert('El campo Nombre es obligatorio');
+            campoNombre.focus();
+            setInvalid(campoNombre, false);
+            return false;
+        }
+        setInvalid(campoNombre, true);
+
+        if (!campoRut.value.trim()) {
+            alert('El campo RUT es obligatorio');
+            campoRut.focus();
+            setInvalid(campoRut, false);
+            return false;
+        }
+        if (!validarRUT(campoRut.value)) {
+            alert('El RUT ingresado no es válido');
+            campoRut.focus();
+            setInvalid(campoRut, false);
+            return false;
+        }
+        setInvalid(campoRut, true);
+
+        if (!campoEmail.value.trim()) {
+            alert('El campo Email es obligatorio');
+            campoEmail.focus();
+            setInvalid(campoEmail, false);
+            return false;
+        }
+        if (!validarEmail(campoEmail.value)) {
+            alert('El formato de Email no es válido. Use: nombre_usuario@servidor.dominio');
+            campoEmail.focus();
+            setInvalid(campoEmail, false);
+            return false;
+        }
+        setInvalid(campoEmail, true);
+
+        if (campoFechaNacimiento.value.trim() && !validarFecha(campoFechaNacimiento.value)) {
+            alert('El formato de fecha debe ser dd/MM/yyyy');
+            campoFechaNacimiento.focus();
+            setInvalid(campoFechaNacimiento, false);
+            return false;
+        }
+        setInvalid(campoFechaNacimiento, true);
+
+        if (!contrasena.value.trim()) {
+            alert('El campo Contraseña es obligatorio');
+            contrasena.focus();
+            return false;
+        }
+
+        if (!validarContrasena(contrasena.value)) {
+            alert('La contraseña debe tener:\n- Mínimo 8 caracteres, máximo 12\n- Al menos 1 letra mayúscula\n- Al menos 1 letra minúscula\n- Al menos 1 número\n- Al menos 1 carácter especial (!@#$%^&*()_+-=[]{};\':"\\|,.<>/?)');
+            contrasena.focus();
+            return false;
+        }
+
+        if (!confirmacionContrasena.value.trim()) {
+            alert('El campo Confirmar Contraseña es obligatorio');
+            confirmacionContrasena.focus();
+            return false;
+        }
+
+        if (contrasena.value !== confirmacionContrasena.value) {
+            alert('Las contraseñas no coinciden');
+            confirmacionContrasena.focus();
+            return false;
+        }
+
         alert('Los datos han sido enviados correctamente.');
         limpiarFormulario();
         return false;
     }
 
-    function limpiarFormulario() { formulario.reset(); campoNombre.focus(); }
+    function limpiarFormulario() {
+        formulario && formulario.reset();
+        campoNombre && campoNombre.focus();
+    }
+
+    engancharFiltros();
 
     btnCancelar && btnCancelar.addEventListener('click', limpiarFormulario);
     formulario && formulario.addEventListener('submit', validarFormulario);
 });
+

@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col col-3"></div>
             <div class="col col-9">
-                <form id="form_registro" action="" method="post">
+<form id="form_registro" action="" method="post" novalidate>
                     <div class="row">
                     <div class="col">
                     <h3>Formulario Registro</h3>
@@ -30,23 +30,27 @@
                     <div class="row">
                         <div class="col">
                         <label for="input_nombre" class="form-label">Nombre:</label>
-                        <input type="text" class="form-control bg-white text-dark" name="nombre" id="input_nombre"
-                        placeholder="Ingrese su nombre" required>
+<input type="text" class="form-control bg-white text-dark" name="nombre" id="input_nombre"
+                        placeholder="Ingrese su nombre" required autocomplete="off" maxlength="60"
+                        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,60}$">
                         </div>
-
-                        <div class="col">
-                        <label for="input_rut" class="form-label">RUT:</label>
-                        <input type="text" class="form-control bg-white text-dark" name="rut" id="input_rut"
-                        placeholder="Ingrese su RUT" required>
-                        </div>
+<div class="col">
+    <label for="input_rut" class="form-label">RUT:</label>
+<input type="text" class="form-control bg-white text-dark" name="rut" id="input_rut"
+           placeholder="Ingrese su RUT (ej: 12.345.678-k)" required inputmode="numeric" autocomplete="off" maxlength="14"
+           pattern="^\d{1,2}(?:\.\d{3})*-?[0-9Kk]$">
+    <div class="invalid-feedback">
+        Por favor, ingrese un RUT válido.
+    </div>
+</div>
                     </div>
                     <br>
 
                     <div class="row">
                         <div class="col">
                             <label for="input_email" class="form-label">Email:</label>
-                        <input type="email" class="form-control bg-white text-dark" name="email" id="input_email"
-                        placeholder="Ingrese su email" required>
+<input type="email" class="form-control bg-white text-dark" name="email" id="input_email"
+                        placeholder="Ingrese su email" required autocomplete="off" maxlength="80">
                         </div>
                     </div>
                     <br>
@@ -54,7 +58,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="input_fecha_nacimiento" class="form-label">Fecha de nacimiento (dd/MM/yyyy):</label>
-                        <input type="text" class="form-control bg-white text-dark" name="fecha_nacimiento" id="input_fecha_nacimiento" placeholder="dd/MM/yyyy">
+<input type="text" class="form-control bg-white text-dark" name="fecha_nacimiento" id="input_fecha_nacimiento" placeholder="dd/MM/yyyy" inputmode="numeric" autocomplete="off" maxlength="10" pattern="^\d{2}\/\d{2}\/\d{4}$">
                         </div>
                     </div>
                     <br>
