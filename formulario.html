@@ -1,117 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario Inicial</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/estilo.formulario.css">
 </head>
-
-<body class="bg-dark text-light">
-    <div class="container">
-        <div class="row">
-        <div class="col">Navegacion...</div>
+<body>
+    <nav class="navbar navbar-dark bg-primary mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">WebApp Usuarios</a>
+            <a class="nav-link text-white" href="index.html">Ver usuarios</a>
         </div>
-    </div>
+    </nav>
+
     <div class="container">
-        <div class="row">
-            <div class="col col-3"></div>
-            <div class="col col-9">
-<form id="form_registro" action="" method="post" novalidate>
-                    <div class="row">
-                    <div class="col">
-                    <h3>Formulario Registro</h3>
-                    </div>
-                    </div>
-                    <br>
+        <form id="form_registro" novalidate>
+            <h3>Formulario Registro</h3>
 
-                    <div class="row">
-                        <div class="col">
-                        <label for="input_nombre" class="form-label">Nombre:</label>
-<input type="text" class="form-control bg-white text-dark" name="nombre" id="input_nombre"
-                        placeholder="Ingrese su nombre" required autocomplete="off" maxlength="60"
-                        pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{1,60}$">
-                        </div>
-<div class="col">
-    <label for="input_rut" class="form-label">RUT:</label>
-<input type="text" class="form-control bg-white text-dark" name="rut" id="input_rut"
-           placeholder="Ingrese su RUT (ej: 12.345.678-k)" required inputmode="numeric" autocomplete="off" maxlength="14"
-           pattern="^\d{1,2}(?:\.\d{3})*-?[0-9Kk]$">
-    <div class="invalid-feedback">
-        Por favor, ingrese un RUT válido.
-    </div>
-</div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="input_email" class="form-label">Email:</label>
-<input type="email" class="form-control bg-white text-dark" name="email" id="input_email"
-                        placeholder="Ingrese su email" required autocomplete="off" maxlength="80">
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="input_fecha_nacimiento" class="form-label">Fecha de nacimiento (dd/MM/yyyy):</label>
-<input type="text" class="form-control bg-white text-dark" name="fecha_nacimiento" id="input_fecha_nacimiento" placeholder="dd/MM/yyyy" inputmode="numeric" autocomplete="off" maxlength="10" pattern="^\d{2}\/\d{2}\/\d{4}$">
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col">
-                            <label class="form-label d-block">Género:</label>
-                        <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="genero" id="genero_m" value="masculino">
-                            <label class="form-check-label" for="genero_m">Masculino</label>
-                        </div>
-                         <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="genero" id="genero_f" value="femenino">
-                            <label class="form-check-label" for="genero_f">Femenino</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="genero" id="genero_o" value="otro">
-                            <label class="form-check-label" for="genero_o">Otro</label>
-                        </div>
-                            
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="input_contrasena" class="form-label">Contraseña:</label>
-                        <input type="password" class="form-control bg-white text-dark" name="contrasena" id="input_contrasena"
-                         placeholder="Ingrese contraseña" required>
-                        </div>
-                        <div class="col">
-                            <label for="input_confirm_contrasena" class="form-label">Confirme Contraseña:</label>
-                        <input type="password" class="form-control bg-white text-dark" name="confirmacion_contrasena" id="input_confirm_contrasena"
-                        placeholder="Repite contraseña" required>
-                        </div>
-
-                    </div>
-
-                    <br>
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col">
-                        <input type="button" id="btn_cancelar" class="btn btn-secondary" value="Cancelar">
-                        <input type="submit" id="btn_enviar" class="btn btn-primary" value="Enviar">
-                        </div>
-                    </div>
-                </form>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="input_nombre" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="input_nombre" placeholder="Ingrese nombre usuario" required>
+                    <div class="invalid-feedback">Ingrese un nombre válido.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="input_usuario" class="form-label">Usuario:</label>
+                    <input type="text" class="form-control" id="input_usuario" placeholder="Ingrese nombre de usuario" required>
+                    <div class="invalid-feedback">Ingrese un usuario válido.</div>
+                </div>
             </div>
-        </div>
+
+            <div class="row g-3 mt-1">
+                <div class="col-md-6">
+                    <label for="input_fecha_ingreso" class="form-label">Fecha Ingreso:</label>
+                    <input type="date" class="form-control" id="input_fecha_ingreso" required>
+                    <div class="invalid-feedback">Ingrese una fecha válida.</div>
+                </div>
+                <div class="col-md-6">
+                    <label for="input_email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="input_email" placeholder="usuario@servidor.dom" required>
+                    <div class="invalid-feedback">Ingrese un email válido.</div>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <label for="input_sitio_web" class="form-label">Sitio Web:</label>
+                <input type="url" class="form-control" id="input_sitio_web" placeholder="https://example.com">
+                <div class="invalid-feedback">Ingrese una URL válida.</div>
+            </div>
+
+            <div class="mt-4 text-end">
+                <button type="button" id="btn_cancelar" class="btn btn-secondary">Cancelar</button>
+                <button type="submit" id="btn_enviar" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/procesar_formulario.js"></script>
 </body>
-
 </html>
